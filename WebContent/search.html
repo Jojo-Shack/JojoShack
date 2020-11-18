@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Search Volunteer Listings</title>
+  
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #cccccc;
+}
+
+#searchbox {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+#searchbutton {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+p.text {
+	font-size: 30px;
+	text-align: center;
+}
+.search {
+	padding: 71px 0;
+	margin:auto;
+	max-width:500px;
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<p class="text"> Enter keyword here to search all available volunteer listings </p>
+<form class="search">
+	<input type="text" id="searchbox" name="keyword" placeholder="Search...">
+	<button id="searchbutton" type="submit">Submit</button>
+</form>
+
+</body>
+</html>
