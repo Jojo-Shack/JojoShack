@@ -7,13 +7,15 @@
 	    <!-- The dialect specifies the type of database used in hibernate so that hibernate generate appropriate type of SQL statements. -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://URL:3306/DATABASE</property>
-		<property name="hibernate.connection.username">USER</property>
-		<property name="hibernate.connection.password">PASSWORD</property>
+		<property name="hibernate.connection.url">jdbc:mysql://3.138.101.214:3306/volunteer</property>
+		<property name="hibernate.connection.username">jojoshack</property>
+		<property name="hibernate.connection.password">password</property>
 		<!-- you can create and update the table if it is not in DB. If create, it create new table everytime-->
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- True you will see sql in console -->
 		<property name="show_sql">false</property>
-		<mapping class="datamodel.Recipe" />
+		<mapping class="datamodel.Listing" />
+		<mapping class="datamodel.Category" />
+		<mapping class="datamodel.Tag" />
 	</session-factory>
 </hibernate-configuration>
