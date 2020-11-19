@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Search Volunteer Listings</title>
+  
+<style>
+body {
+	background-color: #eeeeee;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+ 
+}
+li {
+	display: inline;
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+#desc {
+	height:200px;
+    font-size:14pt;
+}
+</style>
+
+</head>
+<body>
+ <header>
+ <ul>
+  <li><a href="search.html">Search Listings</a></li>
+  <li><a href="input.html">Create a Listing</a></li>
+</ul>
+ </header>
+ 
+<br>
+
+<form action="/action_page.php">
+  <label for="title">Title of listing:</label>
+  <input type="text" id="title" name="title"><br><br>
+  <label for="desc">Description:</label><br>
+  <textarea rows = "5" cols = "60" name = "desc" id="desc"></textarea><br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+
+</html>
