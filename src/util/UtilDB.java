@@ -8,7 +8,11 @@ import java.util.Iterator;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
+import datamodel.Category;
 import datamodel.Listing;
+import datamodel.Tag;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -29,7 +33,107 @@ public class UtilDB {
       return sessionFactory;
    }
 
-   // TODO: Add Create and Search functions for Listings and Tags
+   // Search Listing Names
+   public static List<Listing> searchListings(String keyword) {
+      List<Listing> resultList = new ArrayList<Listing>();
+
+      Session session = getSessionFactory().openSession();
+      Transaction tx = null;
+
+      try {
+         tx = session.beginTransaction();
+         
+         System.out.println((Listing)session.get(Listing.class, 1)); 
+         List<?> listings = session.createQuery("FROM Listing").list();
+         
+         for (Iterator<?> iterator = listings.iterator(); iterator.hasNext();) {
+        	 Listing listing = (Listing) iterator.next();
+            if (listing.getName().toLowerCase().contains(keyword) || listing.getName().contains(keyword)) {
+               resultList.add(listing);
+            }
+         }
+         tx.commit();
+         
+      } catch (HibernateException e) {
+         if (tx != null)
+            tx.rollback();
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+      
+      return resultList;
+   }
+   
+   
+   //Create Listing
+   public static void createListing(String name, String description) {
+      Session session = getSessionFactory().openSession();
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+         session.save(new Listing(name, description));
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx != null)
+            tx.rollback();
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+   
+   // TODO: Learn how to create entities with relationships
+   //Create Listing with category and tags
+//   public static void createListing(String name, String description, Category category, List<Tag> tags) {
+//      Session session = getSessionFactory().openSession();
+//      Transaction tx = null;
+//      try {
+//         tx = session.beginTransaction();
+//         session.save(new Listing(name, description, category, tags));
+//         tx.commit();
+//      } catch (HibernateException e) {
+//         if (tx != null)
+//            tx.rollback();
+//         e.printStackTrace();
+//      } finally {
+//         session.close();
+//      }
+//   }
+   
+   //Create Tag
+   public static void createTag(String name) {
+      Session session = getSessionFactory().openSession();
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+         session.save(new Tag(name));
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx != null)
+            tx.rollback();
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
+   
+   //Create Category
+   public static void createCategory(String name, String description) {
+      Session session = getSessionFactory().openSession();
+      Transaction tx = null;
+      try {
+         tx = session.beginTransaction();
+         session.save(new Category(name, description));
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx != null)
+            tx.rollback();
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
    
    
 }

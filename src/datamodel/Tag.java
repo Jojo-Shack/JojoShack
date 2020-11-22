@@ -41,6 +41,10 @@ public class Tag {
       this.listings = listings;
    }
    
+   public Tag(String name) {
+      this.name = name;
+   }
+   
    public Integer getId() {
       return id;
    }

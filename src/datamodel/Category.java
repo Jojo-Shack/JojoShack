@@ -38,49 +38,54 @@ public class Category {
 	      this.name = name;
 	      this.description = description;
 	      this.listings = listings;
-	   }
+   }
 
-	   public Category(String name, String description, List<Listing> listings) {
-	      this.name = name;
-	      this.description = description;
-	      this.listings = listings;
-	   }
-
-	   public Integer getId() {
-	      return id;
-	   }
-
-	   public void setId(Integer id) {
-	      this.id = id;
-	   }
+   public Category(String name, String description, List<Listing> listings) {
+      this.name = name;
+      this.description = description;
+      this.listings = listings;
+   }
    
-	   public String getName() {
-	      return name;
-	   }
+   public Category(String name, String description) {
+      this.name = name;
+      this.description = description;
+   }
 
-	   public void setName(String name) {
-	      this.name = name;
-	   }
+   public Integer getId() {
+      return id;
+   }
 
-	   public String getDesc() {
-	      return description;
-	   }
+   public void setId(Integer id) {
+      this.id = id;
+   }
+   
+   public String getName() {
+      return name;
+   }
 
-	   public void setDesc(String description) {
-	      this.description = description;
-	   }
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getDesc() {
+      return description;
+   }
+
+   public void setDesc(String description) {
+      this.description = description;
+   }
+   
+   public List<Listing> getListings(){
+	   return listings;
+   }
 	   
-	   public List<Listing> getListings(){
-		   return listings;
-	   }
-	   
-	   public void setListings(List<Listing> listings) {
-		   this.listings = listings;
-	   }
-	   
-	   public void addListing(Listing l) {
-		   this.listings.add(l);
-		   l.setCategory(this);
-	   }
-	   // TODO: Double check how to do a bidirectional relationship for Listing
+   public void setListings(List<Listing> listings) {
+	   this.listings = listings;
+   }
+   
+   public void addListing(Listing l) {
+	   this.listings.add(l);
+	   l.setCategory(this);
+   }
+   // TODO: Double check how to do a bidirectional relationship for Listing
 }

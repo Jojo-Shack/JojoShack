@@ -64,6 +64,11 @@ public class Listing {
       this.category = category;
       this.tags = tags;
    }
+   
+   public Listing(String name, String description) {
+      this.name = name;
+      this.description = description;
+   }
 
    public Integer getId() {
       return id;
