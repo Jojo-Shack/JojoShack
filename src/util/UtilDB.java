@@ -157,7 +157,7 @@ public class UtilDB {
    }
    
    //check login
-   public static List<User> checkLogin(String username) {
+   public static List<User> queryUsers(String username) {
 	   List<User> results = new ArrayList<User>();
 
 	   Session session = getSessionFactory().openSession();

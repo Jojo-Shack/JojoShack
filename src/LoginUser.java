@@ -36,7 +36,7 @@ public class LoginUser extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
-		List<User> list = UtilDB.checkLogin(username);
+		List<User> list = UtilDB.queryUsers(username);
 		
 		String destPage = "login.jsp";
 		

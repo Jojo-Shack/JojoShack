@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,17 +49,29 @@ public class RegisterUser extends HttpServlet {
 		user.setType(usertype);
 		user.setUsername(username);
 		
-		//TODO: add check user name unique
+		//user name unique
+		List<User> list = UtilDB.queryUsers(username);
 		
-		// add user to db
-		UtilDB.registerUser(username, hashed, email, usertype);
+		String destPage = "register.jsp";
 		
-		// save user object to session
-		HttpSession session = request.getSession();
-		session.setAttribute("user", user);
+		if (list.size() == 0) {
+			// add user to db
+			UtilDB.registerUser(username, hashed, email, usertype);
+			
+			// save user object to session
+			HttpSession session = request.getSession();
+			session.setAttribute("user", user);
+			destPage = "searchTest.jsp";
+		}
+		else {
+			String message = "username already used";
+			request.setAttribute("message", message);
+		}
+		
+		
 		
 		//forward to search page
-		RequestDispatcher dispatcher = request.getRequestDispatcher("searchTest.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
 		dispatcher.forward(request, response);
 		
 		
