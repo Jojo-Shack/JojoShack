@@ -17,5 +17,6 @@
 		<mapping class="datamodel.Listing" />
 		<mapping class="datamodel.Category" />
 		<mapping class="datamodel.Tag" />
+		<mapping class="datamodel.User"/>
 	</session-factory>
 </hibernate-configuration>

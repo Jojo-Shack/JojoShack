@@ -12,6 +12,8 @@ import org.hibernate.cfg.Configuration;
 import datamodel.Category;
 import datamodel.Listing;
 import datamodel.Tag;
+import datamodel.User;
+import datamodel.User.UserType;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -135,5 +137,52 @@ public class UtilDB {
       }
    }
    
+   //register user
+   public static void registerUser(String username, String password, String email, UserType userType) {
+	   Session session = getSessionFactory().openSession();
+	   Transaction tx = null;
+	   
+	   try {
+		   tx = session.beginTransaction();
+		   session.save(new User(username, email, password, userType));
+		   tx.commit();
+	   }
+	   catch (HibernateException e ) {
+		   if (tx != null)
+			   tx.rollback();
+		   e.printStackTrace();
+	   } finally {
+		   session.close();
+	   }
+   }
    
+   //check login
+   public static List<User> checkLogin(String username) {
+	   List<User> results = new ArrayList<User>();
+
+	   Session session = getSessionFactory().openSession();
+	   Transaction tx = null;
+	   
+	   try {
+		   tx = session.beginTransaction();
+		   
+		   List<?> users = session.createQuery("FROM User").list();
+	         
+	       for (Iterator<?> iterator = users.iterator(); iterator.hasNext();) {
+	    	   User user = (User) iterator.next();
+	    	   if (user.getUsername().equals(username)) {
+	    		   results.add(user);
+	    	   }
+	       }
+	       tx.commit();
+	   } catch (HibernateException e) {
+	        if (tx != null)
+	            tx.rollback();
+	        e.printStackTrace();
+	   } finally {
+	        session.close();
+	   }
+	   
+	   return results;
+   }
 }
