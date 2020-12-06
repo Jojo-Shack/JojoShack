@@ -69,12 +69,15 @@ public class UtilDB {
    
    
    //Create Listing
-   public static void createListing(String name, String description) {
+   public static void createListing(String name, String description, User user) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
+    	 User owner = (User) session.get(User.class, user.getId());
          tx = session.beginTransaction();
-         session.save(new Listing(name, description));
+         session.save(owner);
+         session.save(new Listing(name, description, owner));
+         
          tx.commit();
       } catch (HibernateException e) {
          if (tx != null)

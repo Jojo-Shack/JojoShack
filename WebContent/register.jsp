@@ -25,7 +25,7 @@
 			<input name="username" size="30" />
 			<br><br>
 			<label for="password">Password:</label>
-			<input type="password" name="password" size="30" />
+			<input type="password" name="password" size="30" required/>
 			<br>${message}
 			<br><br>
 			<button type="submit">Register</button>

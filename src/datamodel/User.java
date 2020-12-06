@@ -1,5 +1,9 @@
 package datamodel;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +11,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,11 +37,26 @@ public class User {
 	@Column(name = "email", nullable = false, columnDefinition = "varchar(45)")
 	private String email;
 	
-	@Column(name = "password", nullable = false, columnDefinition = "varchar(65)")
+	@Column(name = "password", columnDefinition = "varchar(65)")
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
 	private UserType type;
+	
+	@OneToMany(mappedBy="owner", cascade=CascadeType.MERGE)
+	private List<Listing> ownedListings = new ArrayList<Listing>();
+	
+	@ManyToMany()
+	   @JoinTable(
+			   name = "user_listing", 
+			   joinColumns = { 
+					   @JoinColumn(name = "fk_user") //Foreign Key
+					   }, 
+			   inverseJoinColumns = { 
+					   @JoinColumn(name = "fk_listing") //Foreign Key
+					   }
+			   )
+	   private List<Listing> joinedListings = new ArrayList<Listing>();
 
 	public User() {
 		super();
@@ -53,6 +76,13 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.type = type;
+	}
+	
+	public User(String username, String email, UserType type) {
+		super();
+		this.username = username;
+		this.email = email;
 		this.type = type;
 	}
 
@@ -95,4 +125,17 @@ public class User {
 	public void setType(UserType type) {
 		this.type = type;
 	}
+	
+	public List<Listing> getOwnedListings(){
+		   return ownedListings;
+	   }
+		   
+   public void setListings(List<Listing> ownedListings) {
+	   this.ownedListings = ownedListings;
+   }
+	   
+   public void addOwnedListing(Listing l) {
+	   this.ownedListings.add(l);
+	   l.setOwner(this);
+   }
 }

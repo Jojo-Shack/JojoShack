@@ -43,6 +43,7 @@ public class LoginUser extends HttpServlet {
 		if (list.size() > 0) {
 			if (BCrypt.checkpw(password, list.get(0).getPassword())) {
 				User user = new User();
+				user.setId(list.get(0).getId());
 				user.setEmail(list.get(0).getEmail());
 				user.setType(list.get(0).getType());
 				user.setUsername(list.get(0).getUsername());

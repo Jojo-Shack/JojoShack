@@ -3,6 +3,7 @@ package datamodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 
 @Entity
@@ -30,6 +32,13 @@ public class Listing {
 
    @Column(name = "description", columnDefinition = "varchar(10000)")
    private String description;
+   
+   @ManyToOne()
+   @JoinColumn(name="fk_owner")
+   private User owner;
+   
+   @ManyToMany(mappedBy="joinedListings")
+   private List<User> volunteers = new ArrayList<User>();
    
    @ManyToOne
    @JoinColumn(name="fk_category")	// Foreign Key
@@ -51,24 +60,17 @@ public class Listing {
 	   super();
    }
 
-   public Listing(Integer id, String name, String description, Category category, List<Tag> tags) {
+   public Listing(Integer id, String name, String description, User owner) {
       this.id = id;
       this.name = name;
       this.description = description;
-      this.category = category;
-      this.tags = tags;
+      this.owner = owner;
    }
 
-   public Listing(String name, String description, Category category, List<Tag> tags) {
+   public Listing(String name, String description, User owner) {
       this.name = name;
       this.description = description;
-      this.category = category;
-      this.tags = tags;
-   }
-   
-   public Listing(String name, String description) {
-      this.name = name;
-      this.description = description;
+      this.owner = owner;
    }
 
    public Integer getId() {
@@ -122,4 +124,12 @@ public class Listing {
    }
    
    // TODO: Double check how to do a bidirectional relationship for Category
+   
+   public User getOwner() {
+	   return owner;
+   }
+   
+   public void setOwner(User owner) {
+	   this.owner = owner;
+   }
 }
