@@ -73,6 +73,7 @@ public class UtilDB {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
+    	  // Get the user object from the database and don't save the httpsession user object directly.
     	 User owner = (User) session.get(User.class, user.getId());
          tx = session.beginTransaction();
          session.save(owner);
