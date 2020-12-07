@@ -189,4 +189,40 @@ public class UtilDB {
 	   
 	   return results;
    }
+   
+   //Get Listing
+   public static Listing GetListing(int listId) {
+      Session session = getSessionFactory().openSession();
+      Listing joinedListing = new Listing();
+      try {
+    	 joinedListing = (Listing) session.get(Listing.class, listId);
+      } catch (HibernateException e) {
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+      return joinedListing;
+   }
+   
+   //Join Listing
+   public static void JoinListing(User user, Listing listing) {
+      Session session = getSessionFactory().openSession();
+      Transaction tx = null;
+      try {
+    	 User owner = (User) session.get(User.class, user.getId());
+    	 Listing joinedListing = (Listing) session.get(Listing.class, listing.getId());
+    	 owner.addJoinedListings(joinedListing);
+         tx = session.beginTransaction();
+         session.save(owner);
+         session.save(joinedListing);
+         
+         tx.commit();
+      } catch (HibernateException e) {
+         if (tx != null)
+            tx.rollback();
+         e.printStackTrace();
+      } finally {
+         session.close();
+      }
+   }
 }

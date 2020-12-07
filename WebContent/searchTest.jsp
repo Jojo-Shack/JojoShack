@@ -96,8 +96,10 @@ a {
 <body>
 	<header>
 		<ul>
-		  <li><a href="search.html">Search Listings</a></li>
-		  <li><a href="input.html">Create a Listing</a></li>
+		  <li><a href="/JojoShack/AllListings">View Listings</a></li>
+		  <li><a href="searchTest.jsp">Search Listings</a></li>
+		  <li><a href="create.jsp">Create a Listing</a></li>
+		  
 		  
 		  <c:set var="userVal" scope="session" value='${request.getSession().getAttribute("user")}'/>
 		  

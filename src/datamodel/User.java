@@ -45,7 +45,7 @@ public class User {
 	
 	@OneToMany(mappedBy="owner", cascade=CascadeType.MERGE)
 	private List<Listing> ownedListings = new ArrayList<Listing>();
-	
+
 	@ManyToMany()
 	   @JoinTable(
 			   name = "user_listing", 
@@ -138,4 +138,17 @@ public class User {
 	   this.ownedListings.add(l);
 	   l.setOwner(this);
    }
+   
+   public List<Listing> getJoinedListings() {
+		return joinedListings;
+	}
+
+	public void setJoinedListings(List<Listing> joinedListings) {
+		this.joinedListings = joinedListings;
+	}
+	
+	public void addJoinedListings(Listing l) {
+		   this.joinedListings.add(l);
+		   l.setOwner(this);
+	   }
 }

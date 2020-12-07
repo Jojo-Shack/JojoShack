@@ -96,8 +96,8 @@ a {
 <body>
 	<header>
 		<ul>
-		  <li><a href="search.html">Search Listings</a></li>
-		  <li><a href="input.html">Create a Listing</a></li>
+		  <li><a href="searchTest.jsp">Search Listings</a></li>
+		  <li><a href="create.jsp">Create a Listing</a></li>
 		  
 		  <c:set var="userVal" scope="session" value='${request.getSession().getAttribute("user")}'/>
 		  
@@ -115,14 +115,43 @@ a {
  	</header>
  	
  	<br>
+ 	
+ 	<c:set var="listingVal" scope="request" value='${request.getAttribute("listListing")}'/>
+ 	
+	<h1>Volunteer Listings</h1>
 	
-	<form action="CreateListing" method="POST">
-	  <label for="title">Title of listing:</label>
-	  <input type="text" id="title" name="title"><br><br>
-	  <label for="desc">Description:</label><br>
-	  <textarea rows = "5" cols = "60" name = "desc" id="desc"></textarea><br>
-	  <input type="submit" value="Submit">
-	</form>
+	
+	<c:forEach var="listing" items="${listListing}">
+		<table border="1">
+			<caption><h2><c:out value="${listing.getName()}" /></h2></caption>
+			<tr>
+				<th>Creator</th>
+				<th>Category</th>
+				<th>Description</th>
+				<th>Tags</th>
+					<c:if test="${user != null && user.getType() == 'VOLUNTEER'}">
+						<th>Volunteer!</th>
+					</c:if>
+			</tr>
+			<tr>
+				<td><c:out value="${listing.getOwner().getUsername()}" /></td>
+				<td><c:out value="${listing.getCategory().getName()}" /></td>
+				<td><c:out value="${listing.getDesc()}" /></td>
+				<td><c:forEach var="tag" items="${listing.getTags()}"><c:out value="${tag.getName()}"/> | </c:forEach></td>
+					<c:if test="${user != null && user.getType() == 'VOLUNTEER'}">
+						<td>
+						<form class="join" action="JoinListing" method="POST">
+							<button id="joinbutton" type="submit" name="joinListing" value="${listing.getId()}">Join</button>
+						</form>
+						</td>
+					</c:if>
+			</tr>
+		</table>
+		<br>
+	</c:forEach>
+	
+	
+	
 
 
 	<footer id="footer">
