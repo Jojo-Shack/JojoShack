@@ -4,22 +4,16 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Search Volunteer Listings</title>
+<meta charset="UTF-8">
+<title>Matched Listings</title>
 <link href ="main.css" type ="text/css" rel ="stylesheet"/>
 </head>
 <body>
 <header>
 		<jsp:include page="navbar.jsp"></jsp:include>
  </header>
- 	
- 	<br>
- 	
- 	<c:set var="listingVal" scope="request" value='${request.getAttribute("listListing")}'/>
- 	
-	<h1>Volunteer Listings</h1>
-	
-	<c:forEach var="listing" items="${listListing}">
+
+	<c:forEach var="listing" items="${matchedListings}">
 		<table border="1">
 			<caption><h2><c:out value="${listing.getName()}" /></h2></caption>
 			<tr>
@@ -47,5 +41,6 @@
 		</table>
 		<br>
 	</c:forEach>
+
 </body>
 </html>

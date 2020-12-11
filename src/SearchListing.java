@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +23,14 @@ public class SearchListing extends HttpServlet {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String keyword = request.getParameter("keyword");
-      search(keyword, response);
+      //search(keyword, response);
+      List<Listing> DBlistings = UtilDB.searchListings(keyword);
+      
+      request.setAttribute("matchedListings", DBlistings);
+	   
+	  RequestDispatcher dispatcher = request.getRequestDispatcher("searchlistings.jsp");
+	   
+	  dispatcher.forward(request, response);
    }
 
    void search(String keyword, HttpServletResponse response) throws IOException {
