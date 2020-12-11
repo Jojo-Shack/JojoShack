@@ -25,7 +25,7 @@
 		<b class="title"><c:out value="${listing.getName()}" /></b><br><br>
 		<b class="subtitle">Creator:</b> <c:out value="${listing.getOwner().getUsername()}" /><br>
 		<b class="subtitle">Category:</b> <c:out value="${listing.getCategory().getName()}" /><br>
-		<b class="subtitle">Tags:</b> <c:forEach var="tag" items="${listing.getTags()}"><c:out value="${tag.getName()}"/> </c:forEach></td><br><br>
+		<b class="subtitle">Tags:</b> <c:forEach var="tag" items="${listing.getTags()}"><c:out value="${tag.getName()}"/> </c:forEach><br><br>
 		<b class="subtitle">Description:</b><c:out value="${listing.getDesc()}" /><br>
 		<c:if test="${user != null && user.getType() == 'VOLUNTEER'}">
 			<br>

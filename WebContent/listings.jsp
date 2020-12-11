@@ -20,31 +20,20 @@
 	<h1>Volunteer Listings</h1>
 	
 	<c:forEach var="listing" items="${listListing}">
-		<table border="1">
-			<caption><h2><c:out value="${listing.getName()}" /></h2></caption>
-			<tr>
-				<th>Creator</th>
-				<th>Category</th>
-				<th>Description</th>
-				<th>Tags</th>
-					<c:if test="${user != null && user.getType() == 'VOLUNTEER'}">
-						<th>Volunteer!</th>
-					</c:if>
-			</tr>
-			<tr>
-				<td><c:out value="${listing.getOwner().getUsername()}" /></td>
-				<td><c:out value="${listing.getCategory().getName()}" /></td>
-				<td><c:out value="${listing.getDesc()}" /></td>
-				<td><c:forEach var="tag" items="${listing.getTags()}"><c:out value="${tag.getName()}"/> | </c:forEach></td>
-					<c:if test="${user != null && user.getType() == 'VOLUNTEER'}">
-						<td>
-						<form class="join" action="JoinListing" method="POST">
-							<button id="joinbutton" type="submit" name="joinListing" value="${listing.getId()}">Join</button>
-						</form>
-						</td>
-					</c:if>
-			</tr>
-		</table>
+	<div>
+		<b class="title"><c:out value="${listing.getName()}" /></b><br><br>
+		<b class="subtitle">Creator:</b> <c:out value="${listing.getOwner().getUsername()}" /><br>
+		<b class="subtitle">Category:</b> <c:out value="${listing.getCategory().getName()}" /><br>
+		<b class="subtitle">Tags:</b> <c:forEach var="tag" items="${listing.getTags()}"><c:out value="${tag.getName()}"/> </c:forEach><br><br>
+		<b class="subtitle">Description:</b><c:out value="${listing.getDesc()}" /><br>
+		<c:if test="${user != null && user.getType() == 'VOLUNTEER'}">
+			<br>
+			<form class="join" action="JoinListing" method="POST">
+				<button class="button" id="joinbutton" type="submit" name="joinListing" value="${listing.getId()}">Join this listing</button>
+			</form>
+		</c:if>
+	</div>
+
 		<br>
 	</c:forEach>
 </body>
