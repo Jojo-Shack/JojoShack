@@ -35,6 +35,7 @@ public class AllListings extends HttpServlet {
 		   listing.setCategory(DBlisting.getCategory());
 		   listing.setOwner(DBlisting.getOwner());
 		   listing.setTags(DBlisting.getTags());
+		   listing.setDesc(DBlisting.getDesc());
 		   
 		   allListings.add(listing);
 	   }
