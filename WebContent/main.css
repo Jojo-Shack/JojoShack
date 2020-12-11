@@ -70,6 +70,18 @@ a {
 	float: right;
 }
 
+div {
+	border: 1px solid gray;
+	margin: auto;
+	width: 40%;
+	text-align: center;
+}
+
+.center {
+	margin: auto;
+  	width: 50%;
+}
+
 #account {
 	float: right;
 	display: block;
@@ -77,4 +89,31 @@ a {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.button {
+  margin: auto;
+  background-color: #ccc;
+  border: none;
+  color: black;
+  padding: 10px 5;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.title {
+	font-size: 30px;
+}
+
+.subtitle {
+	font-size: 15px;
+	padding-left: 5px;
 }
