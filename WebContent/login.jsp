@@ -5,20 +5,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
+<link href ="main.css" type ="text/css" rel ="stylesheet"/>
+<link href="register.css" type="text/css" rel="stylesheet"/>
+<script src="login.js"></script>
 </head>
 <body>
-	<div style="text-align: center">
-		<h1>Login</h1>
+	<header>
+		<jsp:include page="navbar.jsp"></jsp:include>
+ 	</header>
+	<div class="registerForm">
 		<form action="login" method="post">
-			<label for="username">Username:</label>
-			<input name="username" size="30" />
-			<br><br>
-			<label for="password">Password:</label>
-			<input type="password" name="password" size="30" />
-			<br>${message}
-			<br><br>
-			<button type="submit">Login</button>
-		</form>
-	</div>
+	            <h2>Login</h2>
+	            <p>
+	                <label for="username" class="floatLabel" id="usernameLabel" >Username</label>
+	                <input class="inputClass" id="username" name="username" type="text" onclick="addLabel()" oninput="hideLableUser()" onkeyup="check()">
+	            </p>
+	            <p>
+	                <label for="password" class="floatLabel" id="pass1Label">Password</label>
+	                <input class="inputClass" id="password" name="password" type="password" onclick="addLabel()" oninput="hideLablePass()" onkeyup="check()">
+	            </p>
+	            <p>
+	                <input class="inputClass" type="submit" value="Login" id="submit">
+	            </p>
+	            ${message}
+	     </form>
+     </div>
 </body>
 </html>

@@ -22,6 +22,6 @@
   		</c:if>
   		<li id="create"><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
   		<li id="account">Welcome ${user.username}</li>
-  	</c:otherwise>
+  	</c:otherwise> 
   </c:choose>
 </ul>
