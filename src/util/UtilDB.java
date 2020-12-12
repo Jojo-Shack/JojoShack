@@ -69,7 +69,7 @@ public class UtilDB {
    
    
    //Create Listing
-   public static void createListing(String name, String description, User user) {
+   public static void createListing(String name, String description, int categoryID, List<String> tags, User user) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
@@ -77,7 +77,21 @@ public class UtilDB {
     	 User owner = (User) session.get(User.class, user.getId());
          tx = session.beginTransaction();
          session.save(owner);
-         session.save(new Listing(name, description, owner));
+         
+         Category category = (Category) session.get(Category.class, categoryID);
+         
+         Listing newListing = new Listing(name, description, owner);
+         newListing.setCategory(category);
+         
+         // TODO: Check to see if tags exist before creating them? If we want to be less lazy that is
+         for (String tag : tags) {
+        	 Tag newTag = new Tag();
+        	 newTag.setName(tag);
+        	 createTag(newTag);
+        	 newListing.addTag(newTag);
+         }
+         
+         session.save(newListing);
          
          tx.commit();
       } catch (HibernateException e) {
@@ -108,12 +122,12 @@ public class UtilDB {
 //   }
    
    //Create Tag
-   public static void createTag(String name) {
+   public static void createTag(Tag tag) {
       Session session = getSessionFactory().openSession();
       Transaction tx = null;
       try {
          tx = session.beginTransaction();
-         session.save(new Tag(name));
+         session.save(tag);
          tx.commit();
       } catch (HibernateException e) {
          if (tx != null)
