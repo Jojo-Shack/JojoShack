@@ -19,7 +19,7 @@
 	</form>
 
 	<footer id="footer">
-		<a href="aboutus.html"> About Us</a><br>
+		<a href="aboutus.jsp"> About Us</a><br>
 		<a href="mailto:jojoshackteam@gmail.com">Send us an Email</a>
 	</footer>
 </body>

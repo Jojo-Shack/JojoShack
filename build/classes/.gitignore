@@ -1,4 +1,10 @@
 /AllListings.class
+/CreateListing.class
 /JoinListing.class
+/LoginUser.class
+/LogoutUser.class
+/MyServlet.class
+/RegisterUser.class
+/SearchListing.class
 /datamodel/
 /util/
