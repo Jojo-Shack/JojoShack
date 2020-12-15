@@ -25,8 +25,6 @@ public class JoinListing extends HttpServlet {
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	   String listingId = request.getParameter("joinListing");
 	   
-	   
-	   
 	   String destPage = "searchTest.jsp";
 	   RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
 	   
@@ -50,10 +48,6 @@ public class JoinListing extends HttpServlet {
 		   dispatcher.include(request, response);
 		   out.close();
 	   }
-	   
-	   //TODO: Don't let user join a listing they've already joined.
-	   
-      
    	}
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -15,10 +15,10 @@
   	<c:otherwise>
   		<c:if test="${user.getType() == 'ORGANIZATION'}" >
   			<li><a href="create.jsp">Create a Listing</a></li>
-  			<li><a href="${pageContext.request.contextPath}/viewallposted">View all posted listings</a>
+  			<li><a href="${pageContext.request.contextPath}/ViewAll">View all posted listings</a>
   		</c:if>
   		<c:if test="${user.getType() == 'VOLUNTEER'}" >
-  			<li><a href="${pageContext.request.contextPath}/viewallsignedup">View all listings you signed up for</a>
+  			<li><a href="${pageContext.request.contextPath}/ViewAll">View all listings you signed up for</a>
   		</c:if>
   		<li id="create"><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
   		<li id="account">Welcome ${user.username}</li>

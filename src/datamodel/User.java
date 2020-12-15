@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,10 +44,10 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserType type;
 	
-	@OneToMany(mappedBy="owner", cascade=CascadeType.MERGE)
+	@OneToMany(mappedBy="owner", cascade=CascadeType.MERGE, fetch=FetchType.EAGER)
 	private List<Listing> ownedListings = new ArrayList<Listing>();
 
-	@ManyToMany()
+	@ManyToMany(fetch=FetchType.EAGER)
 	   @JoinTable(
 			   name = "user_listing", 
 			   joinColumns = { 

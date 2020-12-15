@@ -53,6 +53,12 @@ public class UtilDB {
             if (listing.getName().toLowerCase().contains(keyword) || listing.getName().contains(keyword)) {
                resultList.add(listing);
             }
+            List<Tag> tags = listing.getTags();
+            for (Tag tag : tags) {
+            	if(tag.getName().toLowerCase().contains(keyword) || tag.getName().contains(keyword)) {
+            		resultList.add(listing);
+            	}
+            }
          }
          tx.commit();
          
@@ -258,5 +264,40 @@ public class UtilDB {
 	   }
    	}
    
+   // Returns Listings owned by that user id
+   public static List<Listing> getOwnedListings(int userId){
+	   	Session session = getSessionFactory().openSession();
+	   	List<Listing> listings = new ArrayList<Listing>();
+	   	
+	   	try {
+	   		User user = (User) session.get(User.class, userId);
+	   		listings = user.getOwnedListings();
+	   		
+	   	} catch (HibernateException e) {
+	        e.printStackTrace();
+     	} finally {
+	        session.close();
+     	}
+	   	
+	   	return listings;
+   }
+   
+   // Returns Listings joined by that user id
+   public static List<Listing> getJoinedListings(int userId){
+	   	Session session = getSessionFactory().openSession();
+	   	List<Listing> listings = new ArrayList<Listing>();
+	   	
+	   	try {
+	   		User user = (User) session.get(User.class, userId);
+	   		listings = user.getJoinedListings();
+	   		
+	   	} catch (HibernateException e) {
+	        e.printStackTrace();
+      	} finally {
+	        session.close();
+      	}
+	   	
+	   	return listings;
+  }
    
 }
