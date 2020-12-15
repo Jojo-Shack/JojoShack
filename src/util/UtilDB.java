@@ -239,4 +239,24 @@ public class UtilDB {
          session.close();
       }
    }
+   
+   //Delete Listing
+   public static void DeleteListing(int listId) {
+	   Session session = getSessionFactory().openSession();
+	   Transaction tx = null;
+	   try {
+		   Listing listing = (Listing) session.get(Listing.class, listId);
+		   tx = session.beginTransaction();
+		   session.delete(listing);
+		   
+		   tx.commit();
+		   System.out.println(listing.getId().toString() + " Deleted");
+	   } catch (HibernateException e) {
+		   e.printStackTrace();
+	   } finally {
+		   session.close();
+	   }
+   	}
+   
+   
 }

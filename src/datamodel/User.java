@@ -148,7 +148,7 @@ public class User {
 	}
 	
 	public void addJoinedListings(Listing l) {
-		   this.joinedListings.add(l);
-		   l.setOwner(this);
-	   }
+		this.joinedListings.add(l);
+		l.setOwner(this);
+	}
 }

@@ -32,6 +32,15 @@
 				<button class="button" id="joinbutton" type="submit" name="joinListing" value="${listing.getId()}">Join this listing</button>
 			</form>
 		</c:if>
+		<c:if test="${user != null && listing.getOwner().getId() == user.getId() }">
+			<br>
+			<form class="delete" action="DeleteListing" method="POST">
+				<button class="button" id="deletebutton" type="submit" name="deleteListing" value="${listing.getId()}">Delete this listing</button>
+			</form>
+			<form class="modify" action="ModifyListing" method="POST">
+				<button class="button" id="modifybutton" type="submit" name="modifyListing" value="${listing.getId()}">Modify this listing</button>
+			</form>
+		</c:if>
 	</div>
 
 		<br>
