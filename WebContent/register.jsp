@@ -14,7 +14,7 @@
 	<header>
 		<jsp:include page="navbar.jsp"></jsp:include>
  	</header>
- 	<div class="registerForm">
+ 	<main class="registerForm">
 		<form action="register" method="post">
 	            <h2>Sign Up</h2>
 	            <p>
@@ -45,8 +45,10 @@
 	            <p>
 	                <input class="inputClass" type="submit" value="Create My Account" id="submit">
 	            </p>
-	            ${message}
+	            <p id="message">
+	            	<c:out value="${message}"/>
+	            </p>
 	        </form>
-        </div>
+        </main>
 </body>
 </html>

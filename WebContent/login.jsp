@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -13,7 +14,7 @@
 	<header>
 		<jsp:include page="navbar.jsp"></jsp:include>
  	</header>
-	<div class="registerForm">
+	<main class="registerForm">
 		<form action="login" method="post">
 	            <h2>Login</h2>
 	            <p>
@@ -27,8 +28,10 @@
 	            <p>
 	                <input class="inputClass" type="submit" value="Login" id="submit">
 	            </p>
-	            ${message}
+	            <p id="message">
+	            	<c:out value="${message}"/>
+	            </p>
 	     </form>
-     </div>
+     </main>
 </body>
 </html>
